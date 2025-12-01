@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ workout_name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1><a href="/" class="logo-link">GymCoach</a></h1>
+      <p class="subtitle">{{ workout_name }}</p>
+    </header>
+
+    <section class="controls">
+      <form method="get" action="/workout">
+        <label for="group">Muscle Group:</label>
+        <select id="group" name="group">
+          {% for g in available_groups %}
+            <option value="{{ g }}" {% if g|lower == group|lower %}selected{% endif %}>
+              {{ g.capitalize() }}
+            </option>
+          {% endfor %}
+        </select>
+
+        <label for="size"># of Exercises:</label>
+        <input id="size" name="size" type="number" min="1" max="12" value="{{ size }}">
+
+        <button type="submit">Generate Workout</button>
+      </form>
+    </section>
+
+    <section class="workout">
+      {% if exercises %}
+        <h2>{{ group }} Workout</h2>
+        <div class="exercise-grid">
+          {% for ex in exercises %}
+            <article class="exercise-card">
+              <div class="exercise-header">
+                <span class="badge">#{{ ex.order }}</span>
+                <h3>{{ ex.title }}</h3>
+              </div>
+              <p class="meta">
+                <strong>Body Part:</strong> {{ ex.body_part or "N/A" }}<br>
+                <strong>Type:</strong> {{ ex.type or "N/A" }}<br>
+                <strong>Equipment:</strong> {{ ex.equipment or "Bodyweight" }}<br>
+                <strong>Level:</strong> {{ ex.level or "Unknown" }}
+              </p>
+              <p class="sets-reps">
+                {{ ex.sets }} sets × {{ ex.reps }}
+              </p>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No exercises found for this group.</p>
+      {% endif %}
+    </section>
+
+    <footer class="footer">
+      <p>Powered by your megaGym dataset • <a href="/api/workout">View JSON API</a></p>
+    </footer>
+  </div>
+</body>
+</html>

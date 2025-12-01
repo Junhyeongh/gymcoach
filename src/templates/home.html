@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GymCoach – Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1>GymCoach</h1>
+      <p class="subtitle">Your simple, smart workout assistant</p>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <h2>Welcome</h2>
+        <p class="hero-text">
+          Unsure about which workout to choose or how to structure an effective routine?
+          <strong>GymCoach</strong> provides a smart, intuitive solution. Simply indicate
+          the muscle group you want to target and the number of exercises you’d like, and
+          the system generates a curated, personalized routine tailored to your goals.
+        </p>
+        <p class="hero-text">
+          Whether you're aiming for strength, aesthetics, or general fitness,
+          <strong>GymCoach</strong> helps you train with clarity, purpose, and confidence.
+        </p>
+
+        <p class="hero-text">
+          Hi, I’m {{ "Jun" }} — I built this tool to make choosing workouts faster,
+          clearer, and less overwhelming for people who just want to get in and train.
+        </p>
+
+        <div class="hero-actions">
+          <a href="{{ url_for('workout_page') }}" class="primary-button">
+            Get My Curated Workout
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Ready to train? Click the button above to generate your routine.</p>
+    </footer>
+  </div>
+</body>
+</html>
+
